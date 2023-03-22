@@ -9,7 +9,7 @@ List<dynamic> calculator(double hour, double minute, double sleepHour, double sl
   List result = new List.filled(3, null, growable: false);
   double tempHour = 0.0;
   double tempMinute = 0.00;
-  double cycle = 90.00;
+  double tempCycle = 90.00;
 
   if(uniType == UnitType.BED) {
     tempHour = hour + sleepHour;

@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       ],
     );
 
-    var _cycleView = Column(
+    /** var _cycleView = Column(
       children: <Widget>[
         Center(
           child: Text(
@@ -256,6 +256,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
         )
       ]
     )
+     **/
 
     final urlImage = 'https://wallpaper.dog/large/20393704.png';
     return Scaffold(
