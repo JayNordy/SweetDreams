@@ -9,25 +9,20 @@ List<dynamic> calculator(double hour, double minute, double sleepHour, double sl
   List result = new List.filled(3, null, growable: false);
   double tempHour = 0.0;
   double tempMinute = 0.00;
-  double tempCycle = 0.0;
-
-  // base off of what time you wake up
-  // closes sleep cycle to given time to wake pu
-
+  double cycle = 90.00;
 
   if(uniType == UnitType.BED) {
     tempHour = hour + sleepHour;
     tempMinute = minute + sleepMinute;
 
     if (tempMinute >= 60) {
-      tempMinute -= 60.00;
+      tempMinute -= 60;
       tempHour += 1;
     }
   }
-
- if (uniType == UnitType.WAKE) {
+  if (uniType == UnitType.WAKE) {
     tempHour = hour - sleepHour;
-    tempMinute = minute - tempCycle;
+    tempMinute = minute - sleepMinute;
 
     if(tempMinute < 0){
       tempMinute += 60.00;

@@ -82,6 +82,25 @@ class SleepEvent {
 
     return composite;
   }
+
+  Widget toWidget()
+  {
+    return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("Day " + eventNumber.toString(), overflow: TextOverflow.visible),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(DateFormat.Hms().format(sleep) + "\t",overflow: TextOverflow.visible),
+              Text("\t" + DateFormat.Hms().format(wake),overflow: TextOverflow.visible),
+            ],
+          ),
+          Text("Quality: " + quality.toString(),overflow: TextOverflow.visible),
+          Text("Dream Log:\n\t" + dream.toString(),overflow: TextOverflow.visible),
+        ]
+    ));
+  }
 } //END OF CLASS SleepEvent
 
 class SleepData {

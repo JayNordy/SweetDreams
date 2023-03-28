@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'dreams/views/dreams_component.dart';
 import 'dreams/views/sleep_log.dart';
-import 'dreams/presenter/dreams_presenter.dart';
+import 'database.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,8 +9,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  SleepData database = new SleepData();
+
   @override
   Widget build(BuildContext context) {
+    database.addEvent(DateTime.now().subtract(Duration(hours: 3)),wake: DateTime.now().add(Duration(hours: 3)),quality: 3, dream: "Test Dream Description");
+    database.addEvent(DateTime.now().subtract(Duration(hours: 4)),wake: DateTime.now().add(Duration(hours: 2)),quality: 3, dream: "Test Dream Description");
+    database.addEvent(DateTime.now().subtract(Duration(hours: 5)),wake: DateTime.now().add(Duration(hours: 1)),quality: 4, dream: "Test Dream Description");
     return MaterialApp(
       home: Builder(
         builder: (context) => Scaffold(
@@ -31,9 +36,7 @@ class MyApp extends StatelessWidget {
                   ),
                   child: Text('Sleep Calculator'),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return SplashScreen();
-                    }));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(database: database)));
                   },
                 ),
                 ElevatedButton(
@@ -42,11 +45,9 @@ class MyApp extends StatelessWidget {
                   ),
                   child: Text('Sleep Log'),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return SleepLogScreen();
-                    }));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SleepLogPage(database: database)));
                   },
-                )
+                ),
               ],
             )
           ),
@@ -56,26 +57,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreen createState() => _SplashScreen();
-}
-
-class _SplashScreen extends State<SplashScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return new HomePage(new BasicPresenter(), title: 'Sweet Dreams', key: Key("UNITS"),);
-  }
-}
-
-class SleepLogScreen extends StatefulWidget {
-  @override
-  _SleepLogScreen createState() => _SleepLogScreen();
-}
-
-class _SleepLogScreen extends State<SleepLogScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return new SleepLogPage(new BasicPresenter(), title: 'Sleep Log', key: Key("UNITS"),);
-  }
-}
